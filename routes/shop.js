@@ -11,7 +11,8 @@ router.get('/', (req, res)=> {
 
    res.render('shop.ejs', {
         productsMain: products,
-        pageTitle: 'Main Page'
+        pageTitle: 'Main Page',
+        path: '/'
    });
 
 });

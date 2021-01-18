@@ -15,7 +15,7 @@ app.use('/admin', adminRouter.router); ///admin - is a filter
 app.use(shopRoutes);
 
 app.use((req, res)=>{
-    res.render('404.ejs', {pageTitle: "Page Not Found"});
+    res.render('404.ejs', {pageTitle: "Page Not Found", path: ''});
     
     //res.status(404).sendFile(path.join(rootDirectory, 'views', '404.html'));
 });
