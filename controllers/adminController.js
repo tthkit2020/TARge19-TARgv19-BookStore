@@ -1,4 +1,3 @@
-//controller for all product-related logic
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res) =>{
@@ -14,12 +13,14 @@ exports.postAddProduct = (req, res) => {
     res.redirect('/');
 };
 
-exports.getProducts = (req, res)=> {
+exports.getProducts = (req, res) => {
     Product.fetchAll(products => {
-        res.render('shop/index.ejs', {
-        products: products,
-        pageTitle: 'Main Page',
-        path: '/'
-        }); 
+        res.render('admin/products.ejs',
+            {
+                products: products,
+                pageTitle: 'Admin Products',
+                path: '/admin/products'
+            }
+        );
     });
 };

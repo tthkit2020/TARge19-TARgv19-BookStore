@@ -1,11 +1,12 @@
 //what the user sees
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/products');
+const shopController = require('../controllers/shopController');
 //mini express app pluggable to another express app
 
-router.get('/', productController.getProducts);
-router.get('/products');
+router.get('/', shopController.getProducts);
+router.get('/products', shopController.getProducts);
+router.get('/products/:productId', shopController.getProduct);
 router.get('/cart');
 router.get('/checkout');
 
