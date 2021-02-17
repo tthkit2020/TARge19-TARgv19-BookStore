@@ -1,6 +1,7 @@
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const mongoConnect = require('./utilities/db').mongoConnect;
 const adminRouter = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const app = express();
@@ -18,6 +19,12 @@ app.use((req, res)=>{
     //res.status(404).sendFile(path.join(rootDirectory, 'views', '404.html'));
 });
 
-app.listen(5000, ()=>{
+/*app.listen(5000, ()=>{
     console.log('Server is running on Port 5000');
+});*/
+
+mongoConnect(() => {
+    app.listen(3000, ()=>{
+        console.log('Server is running on Port 3000');
+    });
 });

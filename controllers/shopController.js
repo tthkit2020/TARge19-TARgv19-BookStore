@@ -2,18 +2,23 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res)=> {
-    Product.fetchAll(products => {
+    Product.fetchAll()
+    .then(products => {
         res.render('shop/product-list.ejs', {
         products: products,
         pageTitle: 'All Products',
         path: '/products'
         }); 
+    })
+    .catch(error => {
+        console.log('Failed to fetch for shop controller');
     });
 };
 
 exports.getProduct = (req, res) => {
     const productId = req.params.productId;
-    Product.findById(productId, product => {
+    Product.findById(productId)
+    .then(product => {
         res.render('shop/product-detail.ejs', {
             product: product,
             pageTitle: product.title,

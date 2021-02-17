@@ -9,9 +9,17 @@ exports.getAddProduct = (req, res) =>{
 };
 
 exports.postAddProduct = (req, res) => {
-    const product = new Product(null, req.body.title, req.body.imageUrl, req.body.price, req.body.description);
-    product.save();
-    res.redirect('/');
+    const product = new Product(req.body.title, req.body.imageUrl, req.body.price, req.body.description);
+    product.save()
+    .then(result => {
+        console.log("Product saved");
+        res.redirect('/admin/products');
+    })
+    .catch(error => {
+        console.log("Failed to save");
+        res.redirect('/');
+    });
+    
 };
 
 
@@ -48,7 +56,8 @@ exports.postEditProduct = (req, res) => {
 
 
 exports.getProducts = (req, res) => {
-    Product.fetchAll(products => {
+    Product.fetchAll()
+    .then(products => {
         res.render('admin/products.ejs',
             {
                 products: products,
@@ -56,6 +65,9 @@ exports.getProducts = (req, res) => {
                 path: '/admin/products'
             }
         );
+    })
+    .catch(error => {
+        console.log('Failed to fetch all for admin controller');
     });
 };
 
